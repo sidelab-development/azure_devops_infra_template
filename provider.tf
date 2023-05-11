@@ -8,8 +8,8 @@ terraform {
   # More details: https://registry.terraform.io/providers/microsoft/azuredevops/latest/docs
 
   backend "azurerm" {
-    resource_group_name  = "myprojecttfstate" # This resource group must already exist
-    storage_account_name = "myprojecttfstate" # This storage account must already exist
+    resource_group_name  = "myprojecttfstate" # Change to the name of your resource group
+    storage_account_name = "myprojecttfstate" # Change to the name of your storage account
     container_name       = "tfstate"
     key                  = "azuredevops.tfstate"
   }

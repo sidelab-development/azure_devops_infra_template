@@ -5,12 +5,16 @@ resource "azuredevops_build_definition" "function_app_pipe" {
   }
 
   project_id = var.project_id
-  name       = "${local.my_app}_${each.value.name}"
+  name       = "sample_${each.value.name}"
 
   ci_trigger {
     override {
       branch_filter {
         include = [each.value.branch]
+      }
+      path_filter {
+        exclude = []
+        include = []
       }
     }
   }
@@ -18,7 +22,7 @@ resource "azuredevops_build_definition" "function_app_pipe" {
   repository {
     repo_type   = "TfsGit"
     repo_id     = azuredevops_git_repository.function_app_repo.id
-    branch_name = each.value.branch
+    branch_name = "refs/heads/${each.value.branch}"
     yml_path    = "azure-pipelines.yml"
   }
 
@@ -29,29 +33,37 @@ resource "azuredevops_build_definition" "function_app_pipe" {
   # }
   # variable {
   #   name  = "SC_TO_AZURE_RM"
-  #   value = azuredevops_serviceendpoint_azurerm.serviceendpoint.service_endpoint_name
+  #   value = azuredevops_serviceendpoint_azurerm.service_connection.service_endpoint_name
   # }
   # variable {
   #   name  = "FUNCTION_APP_NAME"
-  #   value = "${local.my_function_app}_${each.value.name}"
+  #   value = "sample-${each.value.name}"
+  # }
+  # variable {
+  #   name  = "KV_NAME"
+  #   value = "sample${each.value.name}"
+  # }
+  # variable {
+  #   name  = "DB_CONN_STRING_KV_SECRET_NAME"
+  #   value = "sample-db-conn-string"
   # }
 
   # If you need a pipeline for React JS, uncomment the following block
   # variable {
   #   name  = "API_URL"
-  #   value = "https://API_URL"
+  #   value = "https://sample-${each.value.name}.azurewebsites.net/api/v1"
   # }
   # variable {
-  #   name  = "ENV"
+  #   name  = "STAGE"
   #   value = each.value.name
   # }
   # variable {
   #   name  = "SC_TO_AZURE_RM"
-  #   value = azuredevops_serviceendpoint_azurerm.serviceendpoint.service_endpoint_name
+  #   value = azuredevops_serviceendpoint_azurerm.service_connection.service_endpoint_name
   # }
   # variable {
   #   name  = "AZURE_STORAGE_ACCOUNT"
-  #   value = "STORAGE_ACCOUNT_NAME"
+  #   value = "sample${each.value.name}"
   # }
   # variable {
   #   name  = "AZURE_STORAGE_CONTAINER"

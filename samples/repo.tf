@@ -1,11 +1,7 @@
-locals {
-  my_function_app = "my-function-app"
-}
-
 resource "azuredevops_git_repository" "function_app_repo" {
   # Reference: https://registry.terraform.io/providers/microsoft/azuredevops/latest/docs/resources/git_repository
   project_id = data.azuredevops_project.project.id
-  name       = local.my_function_app
+  name       = "sample"
 
   # If you need start with a blank repository, uncomment the following block
   # initialization {
@@ -18,7 +14,7 @@ resource "azuredevops_git_repository" "function_app_repo" {
   #   source_type = "Git"
   #   source_url  = "https://SAME_OF_OUR_TEMPLATES.git"
   #   # Our templates
-  #   # - Function App: https://github.com/sidelab-development/function_app_template.git
+  #   # - Function App (Node): https://github.com/sidelab-development/function_app_template.git
   #   # - React JS: https://github.com/sidelab-development/react_template.git
   #   # - React Native: https://github.com/sidelab-development/react_native_template.git
   # }

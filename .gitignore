@@ -1,5 +1,6 @@
 .terraform
 **.hcl
+!.terraform.lock.hcl
 
 **.tfvars
 **.tfstate
@@ -8,3 +9,5 @@
 /.DS_Store
 
 secrets
+
+.infracost
